@@ -1,5 +1,7 @@
-﻿\"\"\"preprocessor utilities\"\"\"
-import re, nltk
+"""preprocessor utilities"""
+
+import re
+import nltk
 from nltk.corpus import stopwords
 
 # Ensure resources
@@ -16,12 +18,12 @@ except LookupError:
 _STOPWORDS = set(stopwords.words('english'))
 
 def clean_text(text: str) -> str:
-    \"\"\"Clean and tokenize text.
-    Returns empty string for None/empty input.\"\"\"
+    """Clean and tokenize text.
+    Returns empty string for None/empty input."""
     if not text:
         return ''
     text = text.lower()
-    text = re.sub(r'[^a-z0-9\\s]', ' ', text)
+    text = re.sub(r'[^a-z0-9\s]', ' ', text)
     tokens = nltk.word_tokenize(text)
     tokens = [t for t in tokens if t not in _STOPWORDS]
     return ' '.join(tokens)
